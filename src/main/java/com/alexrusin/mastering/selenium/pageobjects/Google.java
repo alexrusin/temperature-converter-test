@@ -18,9 +18,9 @@ public class Google {
             throw new WrongPageException("Incorrect page for Google Home page");
         }
     }
-    public TemperatureConverterPage goToTemperatureConversionPage(){
+    public TemperatureConverterPage goToTemperatureConversionPage(String query){
         driver.findElement(By.id("lst-ib")).clear();
-        driver.findElement(By.id("lst-ib")).sendKeys("from fahrenheit to celsius");
+        driver.findElement(By.id("lst-ib")).sendKeys(query);
         driver.findElement(By.cssSelector(".lsbb input")).click();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("resultStats")));
