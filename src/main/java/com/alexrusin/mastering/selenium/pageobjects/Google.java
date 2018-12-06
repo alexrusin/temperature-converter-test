@@ -12,16 +12,16 @@ public class Google {
     public Google(WebDriver driver){
         this.driver = driver;
         baseURL = "https://www.google.com/";
-        driver.get(baseURL + "?gws_rd=cr,ssl&ei=qZlNVpOUMNCauQS0iYmoCA&fg=1");
+        driver.get(baseURL);
         System.out.println(driver.getTitle());
         if (!driver.getTitle().equals("Google")){
             throw new WrongPageException("Incorrect page for Google Home page");
         }
     }
     public TemperatureConverterPage goToTemperatureConversionPage(String query){
-        driver.findElement(By.id("lst-ib")).clear();
-        driver.findElement(By.id("lst-ib")).sendKeys(query);
-        driver.findElement(By.cssSelector(".lsbb input")).click();
+        driver.findElement(By.xpath("//*[@id=\"tsf\"]/div[2]/div/div[1]/div/div[1]/input")).clear();
+        driver.findElement(By.xpath("//*[@id=\"tsf\"]/div[2]/div/div[1]/div/div[1]/input")).sendKeys(query);
+        driver.findElement(By.xpath("//*[@id=\"tsf\"]/div[2]/div/div[3]/center/input[1]")).click();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("resultStats")));
         return new TemperatureConverterPage(driver);
